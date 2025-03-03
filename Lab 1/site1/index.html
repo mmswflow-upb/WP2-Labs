@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="css/index.css">
+    <script defer src="js/index.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="images/logo.png" alt="Company Logo" class="logo">
+            <h1>COMPANY NAME</h1>
+        </header>
+
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Register</a>
+            <a href="#">Contact</a>
+        </nav>
+
+        <section class="form-section">
+            <h2>Registration form</h2>
+            <form id="registrationForm">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name">
+                <small class="error" id="nameError"></small>
+
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username">
+                <small class="error" id="usernameError"></small>
+
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password">
+                <small class="error" id="passwordError"></small>
+
+                <label for="repeat-password">Repeat password</label>
+                <input type="password" id="repeat-password" name="repeat-password">
+                <small class="error" id="repeatPasswordError"></small>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email">
+                <small class="error" id="emailError"></small>
+
+                <label>Gender</label>
+                <div class="gender-options">
+                    <input type="radio" id="male" name="gender" value="male">
+                    <label for="male">Male</label>
+                    <input type="radio" id="female" name="gender" value="female">
+                    <label for="female">Female</label>
+                </div>
+                <small class="error" id="genderError"></small>
+
+                <label for="telephone">Telephone</label>
+                <input type="text" id="telephone" name="telephone">
+                <small class="error" id="telephoneError"></small>
+
+                <label for="country">Country</label>
+                <select id="country" name="country">
+                    <option value="romania">Romania</option>
+                    <option value="usa">USA</option>
+                    <option value="uk">UK</option>
+                    <option value="germany">Germany</option>
+                </select>
+
+                <label id = "subscribeLabel">
+                    <input type="checkbox" id="subscribe" name="subscribe">
+                    Subscribe to maillist
+                </label>
+
+                <div class="buttons">
+                    <button type="submit">Submit</button>
+                    <button id= "reset" type="reset">Reset</button>
+                </div>
+            </form>
+        </section>
+    </div>
+</body>
+</html>
