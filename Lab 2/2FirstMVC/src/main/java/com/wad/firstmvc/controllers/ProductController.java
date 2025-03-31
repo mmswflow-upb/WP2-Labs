@@ -1,39 +1,59 @@
 package com.wad.firstmvc.controllers;
 
-
 import com.wad.firstmvc.domain.Product;
+import com.wad.firstmvc.domain.ProductSearchCriteria;
 import com.wad.firstmvc.services.ProductService;
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-@Slf4j
+import java.util.List;
+
 @Controller
 @RequestMapping("/products")
 public class ProductController {
-    //constructor injection of the service
+
     private final ProductService productService;
+
+    @Autowired
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
+
+    // List all products
     @GetMapping
-    public String listProducts(Model model ){
-        model.addAttribute("products",productService.findAll());
-        return "products";
+    public String listProducts(Model model) {
+        model.addAttribute("products", productService.findAll());
+        return "products"; // maps to products.html
     }
 
+    // Show form for new product
     @GetMapping("/new")
-    public String showAddProductForm(Model model){
-        model.addAttribute("product",new Product());
-        return "addproducts";
+    public String showProductForm(Model model) {
+        model.addAttribute("product", new Product());
+        return "productForm"; // maps to productForm.html
     }
 
-    @PostMapping("/new")
-    public String addProduct(Product product){
+    // Save the product
+    @PostMapping
+    public String saveProduct(@ModelAttribute Product product) {
         productService.save(product);
         return "redirect:/products";
+    }
+
+    // Show the product search form
+    @GetMapping("/search")
+    public String showSearchForm(Model model) {
+        model.addAttribute("searchCriteria", new ProductSearchCriteria());
+        return "productSearchForm"; // maps to productSearchForm.html
+    }
+
+    // Process search form and delegate search to the service
+    @PostMapping("/search")
+    public String searchProducts(@ModelAttribute ProductSearchCriteria searchCriteria, Model model) {
+        List<Product> filteredProducts = productService.search(searchCriteria);
+        model.addAttribute("products", filteredProducts);
+        return "products"; // reuse products.html to display search results
     }
 }

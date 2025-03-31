@@ -1,10 +1,8 @@
 package com.wad.firstmvc.domain;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 
 @Data
 @NoArgsConstructor
@@ -12,4 +10,6 @@ import lombok.NoArgsConstructor;
 public class Product {
     private Long id;
     private String name;
+    private Double price;
+    private String category;
 }
