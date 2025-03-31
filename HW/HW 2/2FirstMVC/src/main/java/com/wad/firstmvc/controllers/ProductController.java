@@ -8,8 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Controller
 @RequestMapping("/products")
 public class ProductController {
@@ -25,35 +23,34 @@ public class ProductController {
     @GetMapping
     public String listProducts(Model model) {
         model.addAttribute("products", productService.findAll());
-        return "products"; // maps to products.html
+        return "products"; // corresponds to products.html
     }
 
-    // Show form for new product
+    // Show form for a new product
     @GetMapping("/new")
     public String showProductForm(Model model) {
         model.addAttribute("product", new Product());
-        return "productForm"; // maps to productForm.html
+        return "productForm"; // corresponds to productForm.html
     }
 
-    // Save the product
+    // Save new product
     @PostMapping
     public String saveProduct(@ModelAttribute Product product) {
         productService.save(product);
         return "redirect:/products";
     }
 
-    // Show the product search form
+    // Display search form
     @GetMapping("/search")
     public String showSearchForm(Model model) {
         model.addAttribute("searchCriteria", new ProductSearchCriteria());
-        return "productSearchForm"; // maps to productSearchForm.html
+        return "productSearchForm"; // corresponds to productSearchForm.html
     }
 
-    // Process search form and delegate search to the service
+    // Process search form submission
     @PostMapping("/search")
-    public String searchProducts(@ModelAttribute ProductSearchCriteria searchCriteria, Model model) {
-        List<Product> filteredProducts = productService.search(searchCriteria);
-        model.addAttribute("products", filteredProducts);
+    public String searchProducts(@ModelAttribute ProductSearchCriteria criteria, Model model) {
+        model.addAttribute("products", productService.searchProducts(criteria));
         return "products"; // reuse products.html to display search results
     }
 }

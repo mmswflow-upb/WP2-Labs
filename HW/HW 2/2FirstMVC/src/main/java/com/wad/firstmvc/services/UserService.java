@@ -5,5 +5,5 @@ import java.util.List;
 
 public interface UserService {
     List<User> findAll();
-    void save(User u);
+    void save(User user);
 }

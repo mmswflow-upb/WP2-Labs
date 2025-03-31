@@ -1,25 +1,28 @@
 package com.wad.firstmvc.services;
 
 import com.wad.firstmvc.domain.User;
+import com.wad.firstmvc.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 @Service
 public class UserServiceImpl implements UserService {
-    private List<User> users = new ArrayList<>();
 
-    @Override
-    public List<User> findAll() {
-        return users;
+    private final UserRepository userRepository;
+
+    @Autowired
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Override
-    public void save(User u) {
-        if(u.getId() == null) {
-            u.setId(new Random().nextLong());
-        }
-        users.add(u);
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
+    @Override
+    public void save(User user) {
+        userRepository.save(user);
     }
 }

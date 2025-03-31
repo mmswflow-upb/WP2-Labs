@@ -11,21 +11,28 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/users")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    // List all users
     @GetMapping
     public String listUsers(Model model) {
         model.addAttribute("users", userService.findAll());
-        return "users"; // maps to users.html
+        return "users"; // corresponds to users.html
     }
 
+    // Show form to add a new user
     @GetMapping("/new")
     public String showUserForm(Model model) {
         model.addAttribute("user", new User());
-        return "userForm"; // maps to userForm.html
+        return "userForm"; // corresponds to userForm.html
     }
 
+    // Save a new user
     @PostMapping
     public String saveUser(@ModelAttribute User user) {
         userService.save(user);

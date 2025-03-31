@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface ProductService {
     List<Product> findAll();
-    void save(Product p);
-    List<Product> search(ProductSearchCriteria criteria);
+    void save(Product product);
+    List<Product> searchProducts(ProductSearchCriteria criteria);
 }

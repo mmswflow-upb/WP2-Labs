@@ -6,10 +6,12 @@
 </head>
 <body>
 <h1>Welcome</h1>
-<a th:href="@{'/products'}">View all products</a>
-<a th:href="@{'/products/new'}">Add new product</a>
-<a th:href="@{'/users/new'}">Add new user</a>
-<a th:href="@{'/users'}">View users</a>
-<a th:href="@{'/products/search'}">Find products</a>
+<nav>
+    <a th:href="@{'/products'}">View All Products</a> |
+    <a th:href="@{'/products/new'}">Add New Product</a> |
+    <a th:href="@{'/products/search'}">Find Products</a> |
+    <a th:href="@{'/users'}">View Users</a> |
+    <a th:href="@{'/users/new'}">Add New User</a>
+</nav>
 </body>
 </html>

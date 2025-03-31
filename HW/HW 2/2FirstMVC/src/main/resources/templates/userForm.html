@@ -2,14 +2,21 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add User</title>
+    <title>Add New User</title>
 </head>
 <body>
 <h1>Add New User</h1>
 <form th:action="@{/users}" th:object="${user}" method="post">
-    <label>Name: <input type="text" th:field="*{name}" /></label><br/>
-    <label>Email: <input type="email" th:field="*{email}" /></label><br/>
-    <button type="submit">Save</button>
+    <label>
+        Name: <input type="text" th:field="*{name}" required />
+    </label>
+    <br/>
+    <label>
+        Email: <input type="email" th:field="*{email}" required />
+    </label>
+    <br/>
+    <button type="submit">Save User</button>
 </form>
+<p><a th:href="@{'/'}">Back to Home</a></p>
 </body>
 </html>

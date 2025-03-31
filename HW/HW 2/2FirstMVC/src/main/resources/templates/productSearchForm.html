@@ -7,10 +7,20 @@
 <body>
 <h1>Search Products</h1>
 <form th:action="@{/products/search}" th:object="${searchCriteria}" method="post">
-    <label>Category: <input type="text" th:field="*{category}" /></label><br/>
-    <label>Min Price: <input type="number" step="0.01" th:field="*{minPrice}" /></label><br/>
-    <label>Max Price: <input type="number" step="0.01" th:field="*{maxPrice}" /></label><br/>
+    <label>
+        Category: <input type="text" th:field="*{category}" />
+    </label>
+    <br/>
+    <label>
+        Min Price: <input type="number" step="0.01" th:field="*{minPrice}" />
+    </label>
+    <br/>
+    <label>
+        Max Price: <input type="number" step="0.01" th:field="*{maxPrice}" />
+    </label>
+    <br/>
     <button type="submit">Search</button>
 </form>
+<p><a th:href="@{'/'}">Back to Home</a></p>
 </body>
 </html>
