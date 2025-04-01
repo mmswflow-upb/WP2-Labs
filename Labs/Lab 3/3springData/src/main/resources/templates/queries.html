@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Custom Queries</title>
+  <style>
+    form { border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; }
+    h2 { margin-bottom: 5px; }
+    label { display: inline-block; width: 200px; }
+    input, select { margin-bottom: 10px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 10px; }
+    table, th, td { border: 1px solid #aaa; padding: 5px; }
+  </style>
+</head>
+<body>
+<h1>Custom Queries</h1>
+
+<!-- Query 1: Given Patient ID -->
+<form th:action="@{/queries/patientIssues}" method="post">
+  <h2>1. Query by Patient ID</h2>
+  <label for="patientId">Patient ID:</label>
+  <input type="number" id="patientId" name="patientId" required>
+  <br>
+  <button type="submit" name="action" value="allIssues">Get All Health Issues</button>
+  <button type="submit" name="action" value="issuesWithService">Get Health Issues with at Least One Service</button>
+</form>
+
+<!-- Query 2: Given Date -->
+<form th:action="@{/queries/encounterDate}" method="post">
+  <h2>2. Query by Encounter Date</h2>
+  <label for="encounterDate">Date (YYYY-MM-DD):</label>
+  <input type="date" id="encounterDate" name="encounterDate" required>
+  <br>
+  <button type="submit">Get Patients with Encounters on Date</button>
+</form>
+
+<!-- Query 3: Given CareProvider Name -->
+<form th:action="@{/queries/careProviderPatients}" method="post">
+  <h2>3. Query by Care Provider Name</h2>
+  <label for="providerName">Care Provider Name:</label>
+  <input type="text" id="providerName" name="providerName" required>
+  <br>
+  <button type="submit">Get Patients for Care Provider</button>
+</form>
+
+<!-- Query 4: Given Health Issue Type -->
+<form th:action="@{/queries/issueCareProviders}" method="post">
+  <h2>4. Query by Health Issue Type</h2>
+  <label for="issueType">Health Issue Type:</label>
+  <input type="text" id="issueType" name="issueType" required>
+  <br>
+  <button type="submit">Get Care Providers for Health Issue</button>
+</form>
+
+<!-- Results Section -->
+<div th:if="${results != null}">
+  <h2>Query Results:</h2>
+  <table>
+    <thead>
+    <tr>
+      <th th:each="col : ${resultColumns}" th:text="${col}">Column</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="row : ${results}">
+      <td th:each="cell : ${row}" th:text="${cell}">Data</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<br>
+<a th:href="@{/}">Back to Home</a>
+</body>
+</html>

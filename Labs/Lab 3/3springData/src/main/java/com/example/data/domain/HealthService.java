@@ -13,10 +13,15 @@ public class HealthService {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String description; // e.g. "Flu Shot", "X-Ray", etc.
-    private String type;        // e.g. "Vaccination", "Imaging", etc.
+    private String description; // e.g., "Flu Shot"
+    private String type;        // e.g., "Vaccination"
 
-    // Each health service belongs to one medical encounter.
+    // Many HealthServices belong to one HealthIssue.
+    @ManyToOne
+    @JoinColumn(name = "health_issue_id")
+    private HealthIssue healthIssue;
+
+    // Many HealthServices belong to one MedicalEncounter.
     @ManyToOne
     @JoinColumn(name = "medical_encounter_id")
     private MedicalEncounter medicalEncounter;

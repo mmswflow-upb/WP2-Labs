@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Health Services</title>
+
+</head>
+<body>
+<h1>Health Services</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Description</th>
+        <th>Type</th>
+        <th>Medical Encounter</th>
+        <th>Health Issue</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="service : ${healthServices}">
+        <td th:text="${service.id}">ID</td>
+        <td th:text="${service.description}">Description</td>
+        <td th:text="${service.type}">Type</td>
+        <td th:text="${service.medicalEncounter != null ? service.medicalEncounter.id : 'N/A'}">Encounter ID</td>
+        <td th:text="${service.healthIssue != null ? service.healthIssue.type : 'N/A'}">Health Issue</td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<br><br>
+<a th:href="@{/}">Back to Home</a>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Health Issues</title>
+</head>
+<body>
+<h1>Health Issues</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Type</th>
+        <th>Patient</th>
+        <th>Health Services</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="issue : ${healthIssues}">
+        <td th:text="${issue.id}">ID</td>
+        <td th:text="${issue.type}">Type</td>
+        <td th:text="${issue.patient != null ? issue.patient.name : 'N/A'}">Patient</td>
+        <td>
+            <span th:if="${#lists.isEmpty(issue.healthServices)}">None</span>
+            <span th:each="service, iterStat : ${issue.healthServices}">
+            <span th:text="${service.description}"></span><span th:if="${!iterStat.last}">, </span>
+          </span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<br><br>
+<a th:href="@{/}">Back to Home</a>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Care Providers</title>
+</head>
+<body>
+<h1>Care Providers</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Specialty</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="provider : ${careProviders}">
+        <td th:text="${provider.id}">ID</td>
+        <td th:text="${provider.name}">Name</td>
+        <td th:text="${provider.specialty}">Specialty</td>
+    </tr>
+    </tbody>
+</table>
+<br>
+
+<br>
+<a th:href="@{/}">Back to Home</a>
+</body>
+</html>

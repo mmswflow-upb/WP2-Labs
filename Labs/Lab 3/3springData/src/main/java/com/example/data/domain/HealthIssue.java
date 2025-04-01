@@ -2,6 +2,8 @@ package com.example.data.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -13,11 +15,13 @@ public class HealthIssue {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // For example, "Flu", "Allergy", etc.
-    private String type;
+    private String type; // e.g., "Flu", "Allergy", etc.
 
-    // Unidirectional many-to-one: each HealthIssue is associated with one Patient.
     @ManyToOne
     @JoinColumn(name = "patient_id")
-    private com.example.data.domain.Patient patient;
+    private Patient patient;
+
+    // One HealthIssue can have many HealthService entries.
+    @OneToMany(mappedBy = "healthIssue", cascade = CascadeType.ALL)
+    private List<HealthService> healthServices = new ArrayList<>();
 }

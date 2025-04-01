@@ -37,16 +37,39 @@ public class DataLoader implements CommandLineRunner {
         jane.setName("Jane Smith");
         jane = patientRepository.save(jane);
 
+        Patient bob = new Patient();
+        bob.setName("Bob White");
+        bob = patientRepository.save(bob);
+
+        Patient alice = new Patient();
+        alice.setName("Alice Johnson");
+        alice = patientRepository.save(alice);
+
         // Create HealthIssues.
         HealthIssue flu = new HealthIssue();
         flu.setType("Flu");
-        flu.setPatient(john);  // unidirectional relationship: only on HealthIssue side.
+        flu.setPatient(john);  // unidirectional: only on HealthIssue side.
         flu = healthIssueRepository.save(flu);
+
+        HealthIssue backPain = new HealthIssue();
+        backPain.setType("Back Pain");
+        backPain.setPatient(john);
+        backPain = healthIssueRepository.save(backPain);
 
         HealthIssue allergy = new HealthIssue();
         allergy.setType("Allergy");
         allergy.setPatient(jane);
         allergy = healthIssueRepository.save(allergy);
+
+        HealthIssue cold = new HealthIssue();
+        cold.setType("Common Cold");
+        cold.setPatient(bob);
+        cold = healthIssueRepository.save(cold);
+
+        HealthIssue migraine = new HealthIssue();
+        migraine.setType("Migraine");
+        migraine.setPatient(alice);
+        migraine = healthIssueRepository.save(migraine);
 
         // Create CareProviders.
         CareProvider drBrown = new CareProvider();
@@ -58,6 +81,11 @@ public class DataLoader implements CommandLineRunner {
         drGreen.setName("Dr. Green");
         drGreen.setSpecialty("Allergology");
         drGreen = careProviderRepository.save(drGreen);
+
+        CareProvider drBlack = new CareProvider();
+        drBlack.setName("Dr. Black");
+        drBlack.setSpecialty("Neurology");
+        drBlack = careProviderRepository.save(drBlack);
 
         // Create MedicalEncounters.
         MedicalEncounter encounter1 = new MedicalEncounter();
@@ -78,36 +106,73 @@ public class DataLoader implements CommandLineRunner {
         encounter3.setCareProvider(drGreen);
         encounter3.setHealthIssue(flu);
 
-        // Create HealthServices and associate them with encounters.
+        // Additional Encounters.
+        MedicalEncounter encounter4 = new MedicalEncounter();
+        encounter4.setDate(LocalDate.of(2025, 1, 12));
+        encounter4.setPatient(bob);
+        encounter4.setCareProvider(drBrown);
+        encounter4.setHealthIssue(cold);
+
+        MedicalEncounter encounter5 = new MedicalEncounter();
+        encounter5.setDate(LocalDate.of(2025, 1, 13));
+        encounter5.setPatient(alice);
+        encounter5.setCareProvider(drBlack);
+        encounter5.setHealthIssue(migraine);
+
+        // Create HealthServices and associate them with both encounters and health issues.
         HealthService service1 = new HealthService();
         service1.setDescription("Influenza Vaccination");
         service1.setType("Vaccination");
         service1.setMedicalEncounter(encounter1);
+        service1.setHealthIssue(flu);
         encounter1.getHealthServices().add(service1);
+        flu.getHealthServices().add(service1);
 
         HealthService service2 = new HealthService();
         service2.setDescription("Allergy Test");
         service2.setType("Diagnostics");
         service2.setMedicalEncounter(encounter2);
+        service2.setHealthIssue(allergy);
         encounter2.getHealthServices().add(service2);
+        allergy.getHealthServices().add(service2);
 
         // (Encounter3 deliberately has no service to test queries.)
+        // Additional HealthServices for extra encounters:
+        HealthService service3 = new HealthService();
+        service3.setDescription("Cold Treatment");
+        service3.setType("Medication");
+        service3.setMedicalEncounter(encounter4);
+        service3.setHealthIssue(cold);
+        encounter4.getHealthServices().add(service3);
+        cold.getHealthServices().add(service3);
 
-        // Save encounters (which cascades to health services if configured).
-        medicalEncounterRepository.saveAll(List.of(encounter1, encounter2, encounter3));
+        HealthService service4 = new HealthService();
+        service4.setDescription("Migraine Relief");
+        service4.setType("Medication");
+        service4.setMedicalEncounter(encounter5);
+        service4.setHealthIssue(migraine);
+        encounter5.getHealthServices().add(service4);
+        migraine.getHealthServices().add(service4);
 
-        // Update bidirectional relationships.
+        // Save encounters (which will cascade to health services if cascade is configured).
+        medicalEncounterRepository.saveAll(List.of(encounter1, encounter2, encounter3, encounter4, encounter5));
+
+        // Update bidirectional relationships for patients.
         john.getMedicalEncounters().add(encounter1);
         john.getMedicalEncounters().add(encounter3);
         jane.getMedicalEncounters().add(encounter2);
+        bob.getMedicalEncounters().add(encounter4);
+        alice.getMedicalEncounters().add(encounter5);
+        patientRepository.saveAll(List.of(john, jane, bob, alice));
 
-        patientRepository.saveAll(List.of(john, jane));
-
+        // Update bidirectional relationships for care providers.
         drBrown.getMedicalEncounters().add(encounter1);
+        drBrown.getMedicalEncounters().add(encounter4);
         drGreen.getMedicalEncounters().add(encounter2);
         drGreen.getMedicalEncounters().add(encounter3);
+        drBlack.getMedicalEncounters().add(encounter5);
+        careProviderRepository.saveAll(List.of(drBrown, drGreen, drBlack));
 
-        careProviderRepository.saveAll(List.of(drBrown, drGreen));
 
         System.out.println("Data loaded successfully!");
     }

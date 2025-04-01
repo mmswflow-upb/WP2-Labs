@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Hospital System Home</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        nav a { margin-right: 15px; text-decoration: none; font-weight: bold; }
+        nav a:hover { text-decoration: underline; }
+        header, footer { margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Welcome to the Hospital System</h1>
+    <nav>
+        <a th:href="@{/patients}">Patients</a>
+        <a th:href="@{/encounters}">Encounters</a>
+        <a th:href="@{/careproviders}">Care Providers</a>
+        <a th:href="@{/healthissues}">Health Issues</a>
+        <a th:href="@{/healthservices}">Health Services</a>
+        <a th:href="@{/queries}">Custom Queries</a>
+
+    </nav>
+
+</header>
+
+
+
+
+</body>
+</html>
