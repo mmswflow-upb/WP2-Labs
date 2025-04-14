@@ -12,17 +12,22 @@
     <tr>
         <th>ID</th>
         <th>Name</th>
+        <th>Health Issues</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="patient : ${patients}">
         <td th:text="${patient.id}">ID</td>
         <td th:text="${patient.name}">Name</td>
+        <td>
+            <ul>
+                <li th:each="issue : ${patient.healthIssues}" th:text="${issue.type}">Issue</li>
+            </ul>
+        </td>
     </tr>
     </tbody>
 </table>
-<br>
-<br>
+<br><br>
 <a th:href="@{/}">Back to Home</a>
 </body>
 </html>
