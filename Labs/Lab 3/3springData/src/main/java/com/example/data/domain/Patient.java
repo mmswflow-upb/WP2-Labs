@@ -20,4 +20,7 @@ public class Patient {
     // One Patient has many MedicalEncounters.
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
     private List<MedicalEncounter> medicalEncounters = new ArrayList<>();
+
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
+    private List<HealthIssue> healthIssues = new ArrayList<>();
 }

@@ -92,32 +92,27 @@ public class DataLoader implements CommandLineRunner {
         encounter1.setDate(LocalDate.of(2025, 1, 10));
         encounter1.setPatient(john);
         encounter1.setCareProvider(drBrown);
-        encounter1.setHealthIssue(flu);
 
         MedicalEncounter encounter2 = new MedicalEncounter();
         encounter2.setDate(LocalDate.of(2025, 1, 10));
         encounter2.setPatient(jane);
         encounter2.setCareProvider(drGreen);
-        encounter2.setHealthIssue(allergy);
 
         MedicalEncounter encounter3 = new MedicalEncounter();
         encounter3.setDate(LocalDate.of(2025, 1, 11));
         encounter3.setPatient(john);
         encounter3.setCareProvider(drGreen);
-        encounter3.setHealthIssue(flu);
 
         // Additional Encounters.
         MedicalEncounter encounter4 = new MedicalEncounter();
         encounter4.setDate(LocalDate.of(2025, 1, 12));
         encounter4.setPatient(bob);
         encounter4.setCareProvider(drBrown);
-        encounter4.setHealthIssue(cold);
 
         MedicalEncounter encounter5 = new MedicalEncounter();
         encounter5.setDate(LocalDate.of(2025, 1, 13));
         encounter5.setPatient(alice);
         encounter5.setCareProvider(drBlack);
-        encounter5.setHealthIssue(migraine);
 
         // Create HealthServices and associate them with both encounters and health issues.
         HealthService service1 = new HealthService();

@@ -15,7 +15,6 @@
     <th>Patient</th>
     <th>Care Provider</th>
     <th>Health Issue</th>
-    <th>Health Services</th>
   </tr>
   </thead>
   <tbody>
@@ -24,7 +23,6 @@
     <td th:text="${encounter.date}">Date</td>
     <td th:text="${encounter.patient != null ? encounter.patient.name : 'N/A'}">Patient</td>
     <td th:text="${encounter.careProvider != null ? encounter.careProvider.name : 'N/A'}">Care Provider</td>
-    <td th:text="${encounter.healthIssue != null ? encounter.healthIssue.type : 'N/A'}">Health Issue</td>
     <td>
       <span th:if="${#lists.isEmpty(encounter.healthServices)}">None</span>
       <span th:each="service, iterStat : ${encounter.healthServices}">

@@ -16,11 +16,11 @@ public interface MedicalEncounterRepository extends JpaRepository<MedicalEncount
     List<Patient> findPatientsByEncounterDate(@Param("date") LocalDate date);
 
     // Query for care providers who performed at least one health service for a given health issue type
-    @Query("SELECT DISTINCT me.careProvider " +
-            "FROM MedicalEncounter me " +
-            "WHERE me.healthIssue.type = :issueType " +
-            "  AND size(me.healthServices) > 0")
+    @Query("SELECT DISTINCT hs.medicalEncounter.careProvider " +
+            "FROM HealthService hs " +
+            "WHERE hs.healthIssue.type = :issueType")
     List<CareProvider> findCareProvidersByHealthIssueType(@Param("issueType") String issueType);
+
 }
 
 

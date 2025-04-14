@@ -26,10 +26,7 @@ public class MedicalEncounter {
     @JoinColumn(name = "care_provider_id")
     private CareProvider careProvider;
 
-    // Each encounter addresses one health issue.
-    @ManyToOne
-    @JoinColumn(name = "health_issue_id")
-    private HealthIssue healthIssue;
+
 
     // One MedicalEncounter can have many HealthService entries.
     @OneToMany(mappedBy = "medicalEncounter", cascade = CascadeType.ALL)

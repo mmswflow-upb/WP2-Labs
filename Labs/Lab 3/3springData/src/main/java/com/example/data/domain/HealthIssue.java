@@ -24,4 +24,6 @@ public class HealthIssue {
     // One HealthIssue can have many HealthService entries.
     @OneToMany(mappedBy = "healthIssue", cascade = CascadeType.ALL)
     private List<HealthService> healthServices = new ArrayList<>();
+
+
 }
