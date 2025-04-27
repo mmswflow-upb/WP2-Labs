@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Products</title>
+</head>
+<body>
+    <h1>Products</h1>
+    <div>
+        <a th:href="@{/cart}">View Cart</a>
+        <a th:href="@{/orders}">View My Orders</a>
+    </div>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Action</th>
+        </tr>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.id}">1</td>
+            <td th:text="${product.name}">Product name</td>
+            <td>
+                <a th:href="@{|/cart/add?pid=${product.id}|}">Add to cart</a>
+            </td>
+        </tr>
+    </table>
+    <div sec:authorize="hasRole('ADMIN')">
+        <a th:href="@{/products/new}">Add New Product</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Shopping Cart</title>
+</head>
+<body>
+    <h1>Shopping Cart</h1>
+    <div>
+        <a th:href="@{/products}">Back to Products</a>
+        <a th:href="@{/orders}">View My Orders</a>
+    </div>
+    <form th:if="${!cart.items.empty}" th:action="@{/cart/update}" method="post">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Action</th>
+            </tr>
+            <tr th:each="item : ${cart.items}">
+                <td th:text="${item.product.id}">1</td>
+                <td th:text="${item.product.name}">Product name</td>
+                <td>
+                    <input type="number" 
+                           th:name="'quantity_' + ${item.product.id}" 
+                           th:value="${item.quantity}" 
+                           min="1" />
+                </td>
+                <td>
+                    <a th:href="@{|/cart/remove?pid=${item.product.id}|}">Remove</a>
+                </td>
+            </tr>
+        </table>
+        <div>
+            <button type="submit">Update Quantities</button>
+        </div>
+    </form>
+    <div th:if="${cart.items.empty}">
+        <p>Your cart is empty</p>
+    </div>
+    <div th:if="${!cart.items.empty}">
+        <form th:action="@{/cart/clear}" method="post" style="display: inline;">
+            <button type="submit">Clear Cart</button>
+        </form>
+        <form th:action="@{/cart/checkout}" method="post" style="display: inline;">
+            <button type="submit">Checkout</button>
+        </form>
+    </div>
+</body>
+</html> 
