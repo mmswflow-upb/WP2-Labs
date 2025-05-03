@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/main.css}" type="text/css"/>
+    <script th:src="@{/js/home.js}" defer></script>
+    <title>See products</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+</head>
+<body>
+<div class="header">
+    <img  th:src="@{/images/companyLogo.jpg}" width="100px"  />
+    <span class="header-text">COMPANY NAME</span>
+</div>
+<h2>Add product:</h2>
+<div>
+    <input type="text" id="addName" placeholder="Product Name">
+    <select id="addType">
+        <option value="HARDWARE">Hardware</option>
+        <option value="SOFTWARE">Software</option>
+    </select>
+    <input type="text" id="addDescription" placeholder="Description">
+    <input type="number" id="addPrice" placeholder="Price">
+    <button id="addProductButton">Add product</button>
+</div>
+
+<h2>Delete product:</h2>
+<div>
+    <select id="deleteId">
+        <option value="">Select Product ID</option>
+    </select>
+    <button id="deleteProductButton">Delete product</button>
+</div>
+
+<h2>Modify product:</h2>
+<div>
+    <select id="modifyId">
+        <option value="">Select Product ID</option>
+    </select>
+    <div id="selectedProductDetails" style="margin: 10px 0; padding: 10px; border: 1px solid #ccc; display: none;">
+        <p>Selected Product Details:</p>
+        <div id="productDetailsContent"></div>
+    </div>
+    <input type="text" id="modifyName" placeholder="New Name">
+    <select id="modifyType">
+        <option value="HARDWARE">Hardware</option>
+        <option value="SOFTWARE">Software</option>
+    </select>
+    <input type="text" id="modifyDescription" placeholder="New Description">
+    <input type="number" id="modifyPrice" placeholder="New Price">
+    <button id="modifyProductButton">Update product</button>
+</div>
+
+<h2>Product list:</h2>
+<div id="products"></div>
+</body>
+</html>
